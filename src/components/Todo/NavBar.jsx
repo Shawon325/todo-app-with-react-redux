@@ -1,32 +1,29 @@
-import { useDispatch, useSelector } from "react-redux";
-import { changeNavbarButton } from "../../slices/todo/navbarSlice";
+import { Link, useLocation } from "react-router-dom";
 
 export default function NavBar() {
-  const navButton = useSelector((state) => state.navbar.navButton);
-  const dispatch = useDispatch();
+  const location = useLocation();
 
   return (
     <ul className="nav nav-pills todo-nav">
       <li
         role="presentation"
-        className={`nav-item all-task ${navButton == 1 ? 'active' : ''}`}
-        onClick={() => dispatch(changeNavbarButton(1))}
+        className={`nav-item all-task ${location.pathname == '/' ? 'active' : ''}`}
       >
-        <a href="#" className="nav-link">All</a>
+        <Link to="/" className="nav-link">All</Link>
       </li>
+
       <li
         role="presentation"
-        className={`nav-item active-task ${navButton == 2 ? 'active' : ''}`}
-        onClick={() => dispatch(changeNavbarButton(2))}
+        className={`nav-item active-task ${location.pathname == '/active-task' ? 'active' : ''}`}
       >
-        <a href="#" className="nav-link">Active</a>
+        <Link to="/active-task" className="nav-link">Active</Link>
       </li>
+
       <li
         role="presentation"
-        className={`nav-item completed-task ${navButton == 3 ? 'active' : ''}`}
-        onClick={() => dispatch(changeNavbarButton(3))}
+        className={`nav-item completed-task ${location.pathname == '/complete-task' ? 'active' : ''}`}
       >
-        <a href="#" className="nav-link">Completed</a>
+        <Link to="/complete-task" className="nav-link">Completed</Link>
       </li>
     </ul>
   );

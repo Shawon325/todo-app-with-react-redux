@@ -1,31 +1,14 @@
 import './Todo.css';
 
+import { Route, Routes } from 'react-router-dom';
+
 import Tasks from './Tasks';
 import CreateUpdate from './CreateUpdate';
 import ActiveTasks from './ActiveTasks';
 import NavBar from './NavBar';
 import CompleteTasks from './CompleteTasks';
-import { useSelector } from 'react-redux';
 
 export default function Todo() {
-  const navButton = useSelector((state) => state.navbar.navButton);
-
-  let showTaskList = () => {
-    if (navButton === 1) {
-      return (
-        <Tasks />
-      );
-    } else if (navButton === 2) {
-      return (
-        <ActiveTasks />
-      );
-    } else if (navButton === 3) {
-      return (
-        <CompleteTasks />
-      );
-    }
-  };
-
   return (
     <div className="container">
       <div className="row">
@@ -37,7 +20,11 @@ export default function Todo() {
 
               <NavBar />
 
-              {showTaskList()}
+              <Routes>
+                <Route path='/' element={<Tasks />} />
+                <Route path='/active-task' element={<ActiveTasks />} />
+                <Route path='/complete-task' element={<CompleteTasks />} />
+              </Routes>
 
             </div>
           </div>
